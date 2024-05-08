@@ -1,3 +1,48 @@
 #Run in terminal
 
-IlluminaClip:TruSeq3-PE-2.fa:2:30:10:1:true Leading:30 Trailing:30 SlidingWindow:4:15 MinLen:30
+1. For sample A1-2-3
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A1-2-3_R1_001.fastq.gz A1-2-3_R2_001.fastq.gz -baseout 1_bef_inf.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+
+2. For sample A4
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A4_R1_001.fastq.gz A4_R2_001.fastq.gz -baseout 2_bef_cont.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+
+3. For sample A5-6-7
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A5-6-7_R1_001.fastq.gz A5-6-7_R2_001.fastq.gz -baseout 3_15m_inf.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+
+4. For sample A8
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A8_R1_001.fastq.gz A8_R2_001.fastq.gz -baseout 4_15m_cont.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+
+5. For sample A9-10-11
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A9-10-11_R1_001.fastq.gz A9-10-11_R2_001.fastq.gz -baseout 5_4h_inf.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+
+6. For sample A12
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A12_R1_001.fastq.gz A12_R2_001.fastq.gz -baseout 6_4h_cont.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+
+7. For sample A13-14-15
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A13-14-15_R1_001.fastq.gz A13-14-15_R2_001.fastq.gz -baseout 7_8h_inf.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+
+8. For sample A16
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A16_R1_001.fastq.gz A16_R2_001.fastq.gz -baseout 8_8h_cont.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+9. For sample A17-18-19
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A17-18-19_R1_001.fastq.gz A17-18-19_R2_001.fastq.gz -baseout 9_12h_inf.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+
+10. For sample A20
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A20_R1_001.fastq.gz A20_R2_001.fastq.gz -baseout 10_12h_cont.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+
+11. For sample A21-22-23
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A21-22-23_R1_001.fastq.gz A21-22-23_R2_001.fastq.gz -baseout 11_16h_inf.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
+
+12. For sample A24
+
+java -jar trimmomatic-0.39.jar PE -threads 6 A24_R1_001.fastq.gz A24_R2_001.fastq.gz -baseout 12_16h_cont.fq.gz ILLUMINACLIP:TruSeq3-PE-2.fa:2:30:10:1:true LEADING:30 TRAILING:30 SLIDINGWINDOW:4:15 MINLEN:30
