@@ -1,0 +1,3 @@
+#Run in terminal
+
+IlluminaClip:TruSeq3-PE-2.fa:2:30:10:1:true Leading:30 Trailing:30 SlidingWindow:4:15 MinLen:30
