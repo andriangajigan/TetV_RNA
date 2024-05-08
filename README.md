@@ -6,9 +6,9 @@ This serves as a repository of codes to analyze Tetraselmis sp - TetV1 metatrans
 
 1. **Trimmomatic and FastQC**  
 2. **Tuxedo protocol** (Genome-guided transcriptome assembly)
-    a. **HISAT2**. RNA-seq PE read alignment.
-    b. **StringTie**. Assembly, quantification, merge all transcripts.
-    c. **Ballgown.** Calculate FPKM.
+   a. **HISAT2**. RNA-seq PE read alignment.
+   b. **StringTie**. Assembly, quantification, merge all transcripts.
+   c. **Ballgown.** Calculate FPKM.
 
 **HOST ANALYSIS**
 
