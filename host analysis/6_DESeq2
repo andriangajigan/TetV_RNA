@@ -1,4 +1,4 @@
-DESeq2
+1. DESeq2
 
 a. DESeq2 Early Stage
 $ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/run_DE_analysis.pl 
@@ -14,36 +14,18 @@ $ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/run_D
 --samples_file sample_file_late_comparison.txt
 --contrasts contrast_late_comparison.txt
 
-
-c. DESeq2 day vs night cycle
+c. DESeq2 Day vs Night cycle
 $ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/run_DE_analysis.pl 
 --matrix rsem.gene.counts.matrix
 --method DESeq2
 --samples_file sample_file_day_vs_night.txt
 --contrasts contrast_day_vs_night.txt
 
-6. Extracting and clustering differentially expressed transcripts
-
-a. in inf_vs_cont_no16h 
+2. Create heatmap and correlation matrix
 $ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/analyze_diff_expr.pl
---matrix rsem.gene.TMM.EXPR.matrix
--P 0.05
--C 1 (minimum 2^1 = 2-fold change)
---samples sample_file_inf_vs_cont_arranged.txt
---order_columns_by_samples_file
+--matrix rsem.gene.counts.matrix -P 0.05 -C 2 --order_columns_by_samples_file --samples sample_file_arranged.txt
 
-b. in late_vs_early folder
-$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/analyze_diff_expr.pl
---matrix rsem.gene.TMM.EXPR.matrix
--P 0.05
--C 1 (minimum 2^1 = 2-fold change)
---samples sample_file_inf_vs_cont_arranged.txt
---order_columns_by_samples_file
+3. Partitioning Genes into Expression clusters
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/define_clusters_by_cutting_tree.pl 
+--Ptree 60 -R diffExpr.P0.05_C2.matrix.RData
 
-c. in day_vs_night folder
-$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/analyze_diff_expr.pl
---matrix rsem.gene.TMM.EXPR.matrix
--P 0.05
--C 1 (minimum 2^1 = 2-fold change)
---samples sample_file_inf_vs_cont_arranged.txt
---order_columns_by_samples_file
