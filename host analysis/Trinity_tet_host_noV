@@ -1,0 +1,23 @@
+##RUN IN UH HPC via SLURM
+
+#!/bin/bash
+#SBATCH --job-name=trinity_tet_all_noV
+#SBATCH --partition=shared-long
+#SBATCH --time=7-00:00:00
+#SBATCH --nodes=1
+#SBATCH --tasks-per-node=1
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=350G
+#SBATCH --error=trinity_tet_all_noV.err
+#SBATCH --output=trinity_tet_all_noV.out
+#SBATCH --mail-type=BEGIN,END,FAIL,REQUEUE,TIME_LIMIT_80
+#SBATCH --mail-user=agajigan@hawaii.edu
+
+
+# =============== Start of commands to execute ===============
+
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
+
+module load bio/Trinity
+
+Trinity --seqType fq --left Tet_all_noV_1P.fq.gz --right Tet_all_noV_2P.fq.gz --max_memory 100G --jaccard_clip --CPU 12
