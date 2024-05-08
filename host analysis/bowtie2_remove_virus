@@ -1,0 +1,54 @@
+
+##TetV1 removal for 3_15m_inf
+#run bowtie2
+bowtie2 -p 6 --reorder -x TetV1 -1 3_15m_inf_1P.fq.gz -2 3_15m_inf_2P.fq.gz --un-conc-gz 3_15m_inf_noV > 3_15m_inf.sam
+
+# rename virus-sequence free samples
+mv 3_15m_inf_noV.1 3_15m_inf_noV_1P.fq.gz
+mv 3_15m_inf_noV.2 3_15m_inf_noV_2P.fq.gz
+
+
+##TetV1 removal for 5_4h_inf
+#run bowtie2
+bowtie2 -p 6 --reorder -x TetV1 -1 5_4h_inf_1P.fq.gz -2 5_4h_inf_2P.fq.gz --un-conc-gz 5_4h_inf_noV > 5_4h_inf.sam
+
+# rename virus-sequence free samples
+mv 5_4h_inf_noV.1 5_4h_inf_noV_1P.fq.gz
+mv 5_4h_inf_noV.2 5_4h_inf_noV_2P.fq.gz
+
+##TetV1 removal for 7_8h_inf
+#run bowtie2
+bowtie2 -p 6 --reorder -x TetV1 -1 7_8h_inf_1P.fq.gz -2 7_8h_inf_2P.fq.gz --un-conc-gz 7_-no8h_inf_noV > 7_8h_inf.sam
+
+# rename virus-sequence free samples
+mv 7_8h_inf_noV.1 7_8h_inf_noV_1P.fq.gz
+mv 7_8h_inf_noV.2 7_8h_inf_noV_2P.fq.gz
+
+##TetV1 removal for 9_12h_inf
+#run bowtie2
+bowtie2 -p 6 --reorder -x TetV1 -1 9_12h_inf_1P.fq.gz -2 9_12h_inf_2P.fq.gz --un-conc-gz 9_12h_inf_noV > 9_12h_inf.sam
+
+# rename virus-sequence free samples
+mv 9_12h_inf_noV.1 9_12h_inf_noV_1P.fq.gz
+mv 9_12h_inf_noV.2 9_12h_inf_noV_2P.fq.gz
+
+##TetV1 removal for 11_16h_inf
+#run bowtie2
+bowtie2 -p 6 --reorder -x TetV1 -1 11_16h_inf_1P.fq.gz -2 11_16h_inf_2P.fq.gz --un-conc-gz 11_16h_inf_noV > 11_16h_inf.sam
+
+#rename virus-sequence free samples
+mv 11_16h_inf_noV.1 11_16h_inf_noV_1P.fq.gz
+mv 11_16h_inf_noV.2 11_16h_inf_noV_2P.fq.gz
+
+##TetV1 removal for 12_16h_cont
+#run bowtie2
+bowtie2 -p 6 --reorder -x TetV1 -1 12_16h_cont_1P.fq.gz -2 12_16h_cont_2P.fq.gz --un-conc-gz 12_16h_cont_noV > 12_16h_cont.sam
+
+# rename virus-sequence free samples
+mv 12_16h_cont_noV.1 12_16h_cont_noV_1P.fq.gz
+mv 12_16h_cont_noV.2 12_16h_cont_noV_2P.fq.gz
+
+
+Concatenate files
+cat 1_bef_inf_1P.fq.gz 2_bef_cont_1P.fq.gz 3_15m_inf_noV_1P.fq.gz 4_15m_cont_1P.fq.gz 5_4h_inf_noV_1P.fq.gz 6_4h_cont_1P.fq.gz 7_8h_inf_noV_1P.fq.gz 8_8h_cont_1P.fq.gz 9_12h_inf_noV_1P.fq.gz 10_12h_cont_1P.fq.gz 11_16h_inf_noV_1P.fq.gz 12_16h_cont_noV_1P.fq.gz > Tet_all_noV_1P.fq.gz
+cat 1_bef_inf_2P.fq.gz 2_bef_cont_2P.fq.gz 3_15m_inf_noV_2P.fq.gz 4_15m_cont_2P.fq.gz 5_4h_inf_noV_2P.fq.gz 6_4h_cont_2P.fq.gz 7_8h_inf_noV_2P.fq.gz 8_8h_cont_2P.fq.gz 9_12h_inf_noV_2P.fq.gz 10_12h_cont_2P.fq.gz 11_16h_inf_noV_2P.fq.gz 12_16h_cont_noV_2P.fq.gz > Tet_all_noV_2P.fq.gz
