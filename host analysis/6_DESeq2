@@ -1,0 +1,65 @@
+1. Building transcript and gene expression matrices
+$ /usr/local/Cellar/trinity/2.11.0/libexec/util/abundance_estimates_to_matrix.pl --est_method RSEM --gene_trans_map Trinity_tet_all_noV_good.fasta.gene_trans_map --out_prefix rsem --name_sample_by_basedir --quant_files file_listing_rsem.txt
+$ /usr/local/Cellar/trinity/2.11.0/libexec/util/support_scripts/run_TMM_scale_matrix.pl --matrix rsem.isoform.TPM.not_cross_norm > rsem.isoform.TMM.EXPR.matrixCMD: R --no-save --no-restore --no-site-file --no-init-file -q < rsem.isoform.TPM.not_cross_norm.runTMM.R 1>&2 
+
+2. Counting Numbers of Expressed Transcripts or Genes
+$ /usr/local/Cellar/trinity/2.11.0/libexec/util/misc/count_matrix_features_given_MIN_TPM_threshold.pl rsem.gene.TPM.not_cross_norm | tee rsem.gene.TPM.not_cross_norm.counts_by_min_TPM > gene_minimum_TPM.txt
+$ /usr/local/Cellar/trinity/2.11.0/libexec/util/misc/count_matrix_features_given_MIN_TPM_threshold.pl rsem.isoform.TPM.not_cross_norm | tee rsem.isoform.TPM.not_cross_norm.counts_by_min_TPM > transcript_minimum_TPM.txt
+
+3. Compare Replicates For Each Samples
+$/usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/PtR --matrix rsem.gene.counts.matrix --samples samples.txt --log2 --min_rowSums 10 --compare_replicates
+
+4. Compare Replicates Across Samples
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/PtR --matrix rsem.gene.counts.matrix --min_rowSums 10 -s samples.txt --log2 --CPM --sample_cor_matrix
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/PtR --matrix rsem.gene.counts.matrix --min_rowSums 10 -s samples.txt --log2 --CPM -–center_rows --prin_comp 3
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/PtR --matrix rsem.isoform.counts.matrix --min_rowSums 10 -s samples.txt --log2 --CPM --sample_cor_matrix
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/PtR --matrix rsem.isoform.counts.matrix --min_rowSums 10 -s samples.txt --log2 --CPM --center_rows --prin_comp 3
+
+5. DESeq2
+
+a. DESeq2 inf vs control (without 16h)
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/run_DE_analysis.pl 
+--matrix rsem.gene.counts.matrix
+--method DESeq2
+--samples_file sample_file_inf_vs_cont_no16h.txt
+--contrasts contrast_inf_vs_cont_no16h.txt
+
+b. DESeq2 late vs early inf
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/run_DE_analysis.pl 
+--matrix rsem.gene.counts.matrix
+--method DESeq2
+--samples_file sample_file_late_vs_early.txt
+--contrasts contrast_late_vs_early.txt
+
+c. DESeq2 day vs night cycle
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/run_DE_analysis.pl 
+--matrix rsem.gene.counts.matrix
+--method DESeq2
+--samples_file sample_file_day_vs_night.txt
+--contrasts contrast_day_vs_night.txt
+
+6. Extracting and clustering differentially expressed transcripts
+
+a. in inf_vs_cont_no16h 
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/analyze_diff_expr.pl
+--matrix rsem.gene.TMM.EXPR.matrix
+-P 0.05
+-C 1 (minimum 2^1 = 2-fold change)
+--samples sample_file_inf_vs_cont_arranged.txt
+--order_columns_by_samples_file
+
+b. in late_vs_early folder
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/analyze_diff_expr.pl
+--matrix rsem.gene.TMM.EXPR.matrix
+-P 0.05
+-C 1 (minimum 2^1 = 2-fold change)
+--samples sample_file_inf_vs_cont_arranged.txt
+--order_columns_by_samples_file
+
+c. in day_vs_night folder
+$ /usr/local/Cellar/trinity/2.11.0/libexec/Analysis/DifferentialExpression/analyze_diff_expr.pl
+--matrix rsem.gene.TMM.EXPR.matrix
+-P 0.05
+-C 1 (minimum 2^1 = 2-fold change)
+--samples sample_file_inf_vs_cont_arranged.txt
+--order_columns_by_samples_file
