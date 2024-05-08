@@ -1,19 +1,7 @@
-1. Build trinotate boilerplate in UH HPC
+Run Trinotate in UH HPC
 
-$ Build_Trinotate_Boilerplate_SQLite_db_edited.pl Trinotate
-#edited to updaet to current geneontology: http://current.geneontology.org/ontology/external2go/pfam2go
-
-2. Prep Uniprot Sprot
-$ module load bio/BLAST+
-$ makeblastdb -in uniprot_sprot.pep -dbtype prot
-
-3. Prep Pfam
-$ gunzip Pfam-A.hmm.gz
-$ bio/HMMER
-$ hmmpress Pfam-A.hmm
-
-4. Tun Trinotate in UH HPC
 $ module load bio/Trinotate
+
 $ /opt/apps/software/bio/Trinotate/3.2.2-intel-2018.5.274/auto/autoTrinotate.pl 
 --Trinotate_sqlite Trinotate.sqlite 
 --gene_to_trans_map Trinity.fasta.gene_trans_map #TRinity output
