@@ -1,0 +1,12 @@
+Run TransRate in UH HPC via SLURM
+$ module load bio/Transrate/1.0.3
+$ transrate --assembly Trinity_tet_all_noV.fasta --left Tet_all_noV_1P.fq.gz --right Tet_all_noV_2P.fq.gz --threads 6
+
+Renamed file
+$ mv good.Trinity_tet_all_noV.fasta Trinity_tet_all_noV_good.fasta
+
+Run Trinity Stats
+$ /usr/local/Cellar/trinity/2.11.0/libexec/util/TrinityStats.pl Trinity_tet_all_noV_good.fasta
+
+Run BUSCO for tet_all_noV_good 
+$ docker run -u $(id -u):$(id -g) -v $(pwd):/busco_wd/ -w /busco_wd ezlabgva/busco:v5.beta.1_cv1 busco -m transcriptome -i Trinity_tet_all_noV_good.fasta -o Trinity_tet_all_noV_good_busco -l chlorophyta_odb10
