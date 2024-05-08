@@ -1,0 +1,17 @@
+Rename file
+$ cp ./trinity_out_dir/Trinity.fasta Trinity_tet_all_noV.fasta
+
+Trinity stats
+$ /usr/local/Cellar/trinity/2.11.0/libexec/util/TrinityStats.pl Trinity_tet_all_noV.fasta
+
+Bowtie2 mapping
+$ bowtie2-build Trinity_tet_all_noV.fasta Trinity_tet_all_noV
+
+#run in UH HPC via SLURM
+$ export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK}
+$ module load bio/Bowtie2/2.3.4.2-intel-2018.5.274
+$ module load bio/SAMtools/1.9-intel-2018.5.274
+$ bowtie2 -p 6 -q --no-unal -k 20 -x Trinity_tet_all_noV -1 Tet_all_noV_1P.fq.gz -2 Tet_all_noV_2P.fq.gz 2>tet_all_noV_align_stats.txt | samtools view -@6 -Sb -o tet_all_noV.bam
+
+Running BUSCO
+$ docker run -u $(id -u):$(id -g) -v $(pwd):/busco_wd/ -w /busco_wd ezlabgva/busco:v5.beta.1_cv1 busco -m transcriptome -i Trinity_tet_all_noV.fasta -o Trinity_tet_all_noV_busco -l chlorophyta_odb10
