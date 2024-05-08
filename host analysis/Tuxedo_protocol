@@ -1,0 +1,36 @@
+Prep: hisat2 build index
+$ hisat2-build TetV1.fasta TetV1
+
+1. align each RNA-seq PE reads to the genome using HISAT2
+$ hisat2 -p 6 --dta -x TetV1 -1 3_15m_inf_1P.fq.gz -2 3_15m_inf_2P.fq.gz -S 3_15m_inf.sam
+$ hisat2 -p 6 --dta -x TetV1 -1 5_4h_inf_1P.fq.gz -2 5_4h_inf_2P.fq.gz -S 5_4h_inf.sam
+$ hisat2 -p 8 --dta -x TetV1 -1 7_8h_inf_1P.fq.gz -2 7_8h_inf_2P.fq.gz -S 7_8h_inf.sam
+$ hisat2 -p 8 --dta -x TetV1 -1 9_12h_inf_1P.fq.gz -2 9_12h_inf_2P.fq.gz -S 9_12h_inf.sam
+$ hisat2 -p 8 --dta -x TetV1 -1 11_16h_inf_1P.fq.gz -2 11_16h_inf_2P.fq.gz -S 11_16h_inf.sam
+
+2. Sort and convert the SAM files to BAM
+$ samtools sort -@ 8 -o 3_15m_inf.bam 3_15m_inf.sam
+$ samtools sort -@ 8 -o 5_4h_inf.bam 5_4h_inf.sam
+$ samtools sort -@ 8 -o 7_8h_inf.bam 7_8h_inf.sam
+$ samtools sort -@ 8 -o 9_12h_inf.bam 9_12h_inf.sam
+$ samtools sort -@ 8 -o 11_16h_inf.bam 11_16h_inf.sam
+
+3. Assemble and quantify expressed genes and transcripts
+$ stringtie -p 8 -G TetV1.gff -o 3_15m_inf.gtf -l 3_15m_inf 3_15m_inf.bam
+$ stringtie -p 8 -G TetV1.gff -o 5_4h_inf.gtf -l 5_4h_inf 5_4h_inf.bam
+$ stringtie -p 8 -G TetV1.gff -o 7_8h_inf.gtf -l 7_8h_inf 7_8h_inf.bam
+$ stringtie -p 8 -G TetV1.gff -o 9_12h_inf.gtf -l 9_12h_inf 9_12h_inf.bam
+$ stringtie -p 8 -G TetV1.gff -o 11_16h_inf.gtf -l 11_16h_inf 11_16h_inf.bam
+
+4. Merge transcripts from all samples
+$ stringtie --merge -p 8 -G TetV1.gff -o TetV1_stringtie_merged.gtf mergelist_TetV1.txt
+
+5. Examine how the transcripts compare with the reference annotation (gffcompare)
+$ gffcompare -r TetV1.gff TetV1_stringtie_merged.gtf
+
+6. Estimate transcript abundances and create table counts for Ballgown
+$ stringtie –e –B -p 8 -G TetV1_stringtie_merged.gtf -o ballgown/3_15m_inf /3_15m_inf_bgown.gtf 3_15m_inf.bam
+$ stringtie -e -B -p 8 -G TetV1_stringtie_merged.gtf -o ballgown/5_4h_inf/5_4h_inf_bgown.gtf 5_4h_inf.bam
+$ stringtie -e -B -p 8 -G TetV1_stringtie_merged.gtf -o ballgown/7_8h_inf/7_8h_inf_bgown.gtf 7_8h_inf.bam
+$ stringtie -e -B -p 8 -G TetV1_stringtie_merged.gtf -o ballgown/9_12h_inf/9_12h_inf_bgown.gtf 9_12h_inf.bam
+$ stringtie -e -B -p 8 -G TetV1_stringtie_merged.gtf -o ballgown/11_16h_inf/11_16h_inf_bgown.gtf 11_16h_inf.bam
