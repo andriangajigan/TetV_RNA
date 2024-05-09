@@ -1,4 +1,4 @@
-1. Filtering transcripts based on expression values (Retain only the highest expressed isoform per gene)
+## Filtering transcripts based on expression values (Retain only the highest expressed isoform per gene)
 $ /usr/local/Cellar/trinity/2.11.0/libexec/util/filter_low_expr_transcripts.pl 
 --matrix rsem.isoform.TMM.EXPR.matrix
 --transcripts Trinity_tet_all_noV_good.fasta
@@ -6,7 +6,3 @@ $ /usr/local/Cellar/trinity/2.11.0/libexec/util/filter_low_expr_transcripts.pl
 --trinity_mode 
 > Trinity_tet_all_noV_good_hform.fasta
 2>high_expr_iform_filt.txt
-
-
-2. Run transdecoder
-$ TransDecoder.LongOrfs -t Trinity_tet_all_noV_good_hform.fasta
