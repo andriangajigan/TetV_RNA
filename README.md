@@ -1,6 +1,6 @@
 # TetV RNA
 
-This serves as a repository of codes to analyze Tetraselmis sp - TetV1 metatranscriptome. As well as codes for generating the figures.
+This serves as a repository of codes to analyze Tetraselmis sp - TetV1 metatranscriptome. 
 
 **VIRUS ANALYSIS**
 
