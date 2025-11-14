@@ -1,3 +1,7 @@
-Run RSEM
+#Run RSEM
 
+#align and estimate abundance
 $ /usr/local/Cellar/trinity/2.11.0/libexec/util/align_and_estimate_abundance.pl --transcripts Trinity_tet_all_noV_good.fasta --seqType fq --samples_file quanti_samples_noV.txt --est_method RSEM --aln_method bowtie --thread_count 6 --trinity_mode --prep_reference --output_dir rsem_out &> trinity_rsem.out
+
+#create matrix
+$/usr/local/Cellar/trinity/2.11.0/libexec/util/abundance_estimates_to_matrix.pl --est_method RSEM --gene_trans_map Trinity_tet_all_noV_good.fasta.gene_trans_map --out_prefix rsem --name_sample_by_basedir --quant_files file_listing_rsem.txt
